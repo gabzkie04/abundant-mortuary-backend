@@ -40,7 +40,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        
+
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
@@ -112,6 +112,6 @@ return [
     |
     */
 
-    'password_timeout' => 300800,
+    'password_timeout' => 3000800,
 
 ];

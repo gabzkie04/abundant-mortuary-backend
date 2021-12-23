@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AgentController;
 use App\Http\Controllers\Api\DataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,14 @@ use App\Http\Controllers\Api\CollectController;
 
 Route::post("register", [UserController::class, "register"]);
 Route::post("login", [UserController::class, "login"]);
+Route::get("get-agents-name", [AgentController::class, "getAgentsName"]);
 
 Route::group(["middleware" => ["auth:api"]], function(){
     Route::get("profile", [UserController::class, "profile"]);
     Route::get("logout", [UserController::class, "logout"]);
+
+    // agents api routes
+
 
     // planholder api routes
     Route::post("add-planholder", [PlanholderController::class, "addPlanholder"]);
