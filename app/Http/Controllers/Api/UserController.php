@@ -15,6 +15,8 @@ class UserController extends Controller
             "name" => "required|unique:users",
             "email" => "required|email|unique:users",
             "role_id" => "required",
+            "contact" => "required",
+            "gender" => "required",
             "password" => "required|confirmed",
         ]);
 
@@ -22,6 +24,9 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->contact = $request->contact;
+        $user->gender = $request->gender;
+        $user->birthdate = $request->birthdate;
         $user->role_id = $request->role_id;
         $user->password = bcrypt($request->password);
 
