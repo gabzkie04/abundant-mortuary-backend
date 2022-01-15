@@ -12,6 +12,7 @@ class PlanholderController extends Controller
    {
         // validate
         $request->validate([
+            "pf_no" => "required",
             "agent_id"=>"required",
             "name" => "required|unique:planholders",
             "barangay" => "required",
@@ -26,6 +27,7 @@ class PlanholderController extends Controller
         // create user data + save
         $planholder = new Planholder();
         $planholder->agent_id = $request->agent_id;
+        $planholder->pf_no = $request->pf_no;
         $planholder->name = $request->name;
         $planholder->lot_block = $request->lot_block;
         $planholder->street = $request->street;
@@ -85,6 +87,7 @@ class PlanholderController extends Controller
         if(Planholder::where("id", $id)->exists())
         {
             $planholder = Planholder::find($id);
+            $planholder->pf_no = !empty($request->pf_no) ? $request->pf_no: $planholder->pf_no;
             $planholder->name = !empty($request->name) ? $request->name: $planholder->name;
             $planholder->agent_id = !empty($request->agent_id) ? $request->agent_id: $planholder->agent_id;
             $planholder->lot_block = !empty($request->lot_block) ? $request->lot_block: $planholder->lot_block;

@@ -16,6 +16,7 @@ class CreatePlanholdersTable extends Migration
         Schema::create('planholders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('agent_id')->unsigned();
+            $table->string('pf_no',50)->unique();
             $table->string('name',50)->unique();
             $table->string('lot_block',255)->nullable();
             $table->string('street',255)->nullable();
