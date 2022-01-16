@@ -11,7 +11,7 @@ class DataController extends Controller
 {
     public function addData(Request $request)
     {
-        if(Planholder::where("id", $request->planholder_id)->exists())
+        if(Planholder::where("planholder_id", $request->planholder_id)->exists())
         {
             // validate
             $request->validate([
@@ -43,7 +43,7 @@ class DataController extends Controller
             return response()->json([
                 "status" => 1,
                 "message"=> "Data added successfully",
-                "data_id" => $data->id 
+                "data_id" => $data->id
             ], 200);
         }
         else
@@ -53,7 +53,7 @@ class DataController extends Controller
                 "message" => "Planholder not found"
             ], 404);
         }
-        
+
     }
 
     public function updateData(Request $request, $id)
