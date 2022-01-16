@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PlanholderController;
 use App\Http\Controllers\Api\BeneficiaryController;
 use App\Http\Controllers\Api\CollectController;
+use App\Http\Controllers\Api\CollectorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,8 @@ use App\Http\Controllers\Api\CollectController;
 
 Route::post("register", [UserController::class, "register"]);
 Route::post("login", [UserController::class, "login"]);
-Route::get("get-agents-name", [AgentController::class, "getAgentsName"]);
+Route::get( "get-agents-name", [AgentController::class, "getAgentsName"]);
+Route::get("get-collectors", [CollectorController::class, "getCollector"]);
 
 Route::group(["middleware" => ["auth:api"]], function(){
     Route::get("profile", [UserController::class, "profile"]);
