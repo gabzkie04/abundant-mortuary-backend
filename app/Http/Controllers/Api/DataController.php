@@ -58,7 +58,7 @@ class DataController extends Controller
 
     public function updateData(Request $request, $id)
     {
-        if(Data::where("id", $id)->exists())
+        if(Data::where("planholder_id", $id)->exists())
         {
             $data = Data::find($id);
             $data->total_contract_price = !empty($request->total_contract_price) ? $request->total_contract_price: $data->total_contract_price;
@@ -106,9 +106,9 @@ class DataController extends Controller
 
     public function getSingleData($id)
     {
-        if(Data::where("id", $id)->exists())
+        if(Data::where("planholder_id", $id)->exists())
         {
-            $data_detail = Data::where("id", $id)->first();
+            $data_detail = Data::where("planholder_id", $id)->first();
             return response()->json([
                 "status" => 1,
                 "message" => "Data Found",
