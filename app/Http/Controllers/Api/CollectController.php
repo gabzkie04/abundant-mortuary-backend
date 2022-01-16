@@ -13,7 +13,7 @@ class CollectController extends Controller
 {
     public function addCollect(Request $request)
     {
-    
+
             if(Planholder::where("id", $request->planholder_id)->exists())
             {
                 // validate
@@ -25,24 +25,24 @@ class CollectController extends Controller
                     "date_collect"=>"required",
                     "number_of_months_collected"=>"required",
                 ]);
-    
+
                 // create user data + save
                 $collect = new Collect();
-    
+
                 $collect->collector_id = $request->collector_id;
                 $collect->planholder_id = $request->planholder_id;
                 $collect->amount = $request->amount;
                 $collect->or_number = $request->or_number;
                 $collect->date_collect = $request->date_collect;
                 $collect->number_of_months_collected = $request->number_of_months_collected;
-    
+
                 $collect->save();
-    
+
                 // send response
                 return response()->json([
                     "status" => 1,
                     "message"=> "Collect added successfully",
-                    "collect_id" => $collect->id 
+                    "collect_id" => $collect->id
                 ], 200);
             }
             else
@@ -52,7 +52,7 @@ class CollectController extends Controller
                     "message" => "Planholder not found"
                 ], 404);
             }
-       
+
     }
 
     public function updateCollect(Request $request, $id)
@@ -104,21 +104,21 @@ class CollectController extends Controller
 
     public function getCollects()
     {
-        
+
         $collects = Collect::get();
         return response()->json([
             "status" => 1,
             "message" => "Collects Found",
             "data" => $collects
         ], 200);
-     
+
     }
 
     public function getCollectByPlanholder($id)
     {
         if(Planholder::where("id", $id)->exists())
         {
-            $collects = Collect::where("planholder_id", $id)->get();
+            $collects = Collect::select('amount','or_number','date_collect', 'number_of_months_collected','name as collector')->where("planholder_id", $id)->join('users', 'collect.collector_id', '=', 'users.id')->get();
             return response()->json([
                 "status" => 1,
                 "message" => "Collects Found",
