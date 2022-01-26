@@ -11,7 +11,7 @@ class DataController extends Controller
 {
     public function addData(Request $request)
     {
-        if(Planholder::where("planholder_id", $request->planholder_id)->exists())
+        if(Data::where("planholder_id", $request->planholder_id)->exists())
         {
             // validate
             $request->validate([
