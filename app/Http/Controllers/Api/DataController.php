@@ -58,7 +58,7 @@ class DataController extends Controller
 
     public function updateData(Request $request, $id)
     {
-        if(Data::where("planholder_id", $id)->exists())
+        if(Data::where("id", $id)->exists())
         {
             $data = Data::find($id);
             $data->total_contract_price = !empty($request->total_contract_price) ? $request->total_contract_price: $data->total_contract_price;
