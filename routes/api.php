@@ -60,6 +60,7 @@ Route::group(["middleware" => ["auth:api"]], function(){
     Route::get("get-collect-by-collector/{id}", [CollectController::class, "getCollectByCollector"]);
     Route::put("update-collect/{id}", [CollectController::class, "updateCollect"]);
     Route::delete("delete-collect/{id}", [CollectController::class, "deleteCollect"]);
+    Route::post("get-collect-filtered", [CollectController::class, "getCollectsFiltered"]);
 
 });
 

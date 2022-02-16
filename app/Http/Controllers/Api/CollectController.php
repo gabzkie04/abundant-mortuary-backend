@@ -114,6 +114,29 @@ class CollectController extends Controller
 
     }
 
+    public function getCollectsFiltered(Request $request)
+    {
+        $collects = Collect::select(
+        'planholders.name as planholder', 
+        'users.name as collector',
+        'amount',
+        'or_number',
+        'date_collect',
+        'number_of_months_collected',
+        'collect.id')
+        ->whereBetween('date_collect', [$request->from, $request->to])
+        ->join('planholders', 'planholders.id', 'collect.planholder_id')
+        ->join('users', 'users.id', 'collect.collector_id')
+        ->get();
+
+        return response()->json([
+            "status" => 1,
+            "message" => "Collects Found",
+            "data" => $collects
+        ], 200);
+
+    }
+
     public function getCollectByPlanholder($id)
     {
         if(Planholder::where("id", $id)->exists())
